@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 import cors from 'cors';
 import { getFilesWithKeyword } from './utils/getFilesWithKeyword';
+import 'dotenv/config'
 
 const app: Express = express();
 

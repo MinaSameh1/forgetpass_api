@@ -25,3 +25,7 @@ export async function loginController(
     next(e)
   }
 }
+
+export async function resetpassController(req: Request, res: Response) {
+
+}
