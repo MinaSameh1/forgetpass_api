@@ -4,6 +4,7 @@ import helmet from 'helmet';
 import cors from 'cors';
 import { getFilesWithKeyword } from './utils/getFilesWithKeyword';
 import 'dotenv/config'
+import logger from './utils/logger';
 
 const app: Express = express();
 
@@ -42,11 +43,12 @@ getFilesWithKeyword('router', __dirname + '/app').forEach((file: string) => {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 app.use((err: Error, _: express.Request, res: express.Response, next: express.NextFunction) => {
-  return res.status(500).json({
+  logger.error({
     errorName: err.name,
     message: err.message,
     stack: err.stack || 'no stack defined'
-  });
+  })
+  return res.status(500).json({ message: 'Internal server Error' });
 });
 
 export default app;
