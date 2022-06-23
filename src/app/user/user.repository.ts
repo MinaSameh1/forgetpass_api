@@ -1,5 +1,5 @@
 import { FilterQuery, QueryOptions } from "mongoose";
-import UserModel, { UserDocument } from "./user.model";
+import UserModel, { UserDocument, UserInput } from "./user.model";
 
 export async function findUser(
   query: FilterQuery<UserDocument>,
@@ -17,3 +17,6 @@ export async function findOneUser(
   return UserModel.findOne(query, {}, options)
 }
 
+export async function CreateUser(user: UserInput) {
+  return UserModel.create(user)
+}

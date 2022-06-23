@@ -21,7 +21,7 @@ export async function sendmail(email: string, url: string) {
     text: `You Requested to reset password, the following link will reset it \n ${url}`,
   }
 
-  transporter.sendMail(mailOptions, (err, info) => {
+  return transporter.sendMail(mailOptions, (err, info) => {
     if (err) throw err
     logger.info(`Mail send. ${info}`)
   })

@@ -1,9 +1,13 @@
-import { QueryOptions } from "mongoose";
+import { FilterQuery, QueryOptions } from "mongoose";
 import { string } from "zod";
-import TokenModel from "./token.model";
+import TokenModel, { tokenDocuement } from "./token.model";
 
 export function findToken(uid: string, options: QueryOptions = { lean: true }) {
   return TokenModel.findOne({ uid: uid }, {}, options)
+}
+
+export function findTokenQuery(query: FilterQuery<tokenDocuement>, options: QueryOptions = { lean: true }) {
+  return TokenModel.findOne(query, {}, options)
 }
 
 export function createToken({

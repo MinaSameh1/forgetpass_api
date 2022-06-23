@@ -10,7 +10,7 @@ export interface UserInput {
 }
 
 export interface UserDocument extends UserInput, mongoose.Document {
-  token: string
+  token?: string
   createdAt: Date
   updatedAt: Date
   comparePassword(candidatePassword: string): Promise<Boolean>
@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: { type: String, required: true },
     isAdmin: { type: Boolean, required: true },
-    token: { type: String, required: true },
+    token: { type: String, required: false },
   },
   {
     timestamps: true,

@@ -1,5 +1,12 @@
 import mongoose from 'mongoose'
 
+export interface tokenDocuement extends mongoose.Document{
+  token: string
+  uid: string
+  createdAt: string
+  updatedAt: string
+}
+
 const tokenSchema = new mongoose.Schema(
   {
     token: { type: String, required: true },
