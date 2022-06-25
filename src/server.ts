@@ -19,15 +19,10 @@ app.use(express.urlencoded({ extended: true }));
 // Handle logs in console during development
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
-  app.use(cors());
 }
-
-// Handle security and origin in production
-if (process.env.NODE_ENV === 'production') {
-  app.use(helmet());
-  // Mainly since app is deployed on heroku while front is deployed on vercel
-  app.use(cors());
-}
+app.use(helmet());
+// Mainly since app is deployed on heroku while front is deployed on vercel
+app.use(cors());
 
 /************************************************************************************
  *                               Register all routes
