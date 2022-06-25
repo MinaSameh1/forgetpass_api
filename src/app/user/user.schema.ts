@@ -13,14 +13,14 @@ export const loginUserSchema = object({
 
 export const resetpassSchema = object({
   body: object({
-    email: string({
-      required_error: 'Email is required',
-    }).email("must be email!")
+    password: string({
+      required_error: 'Password is required',
+    }).min(6, 'Password too short - should be 6 chars minimum'),
   }),
 })
 
 export const tokenParam = object({
-  param: object({
+  params: object({
     token: string({
       required_error: 'Token is missing'
     })

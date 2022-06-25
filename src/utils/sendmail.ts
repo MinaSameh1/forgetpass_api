@@ -23,6 +23,6 @@ export async function sendmail(email: string, url: string) {
 
   return transporter.sendMail(mailOptions, (err, info) => {
     if (err) throw err
-    logger.info(`Mail send. ${info}`)
+    logger.info(`Mail send. ${JSON.stringify(info)}`)
   })
 }

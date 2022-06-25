@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import argon from 'argon2'
+import logger from '../../utils/logger'
 
 export interface UserInput {
   email: string
@@ -51,8 +52,11 @@ userSchema.methods.comparePassword = async function (
   const user = this as UserDocument
 
   return argon
-    .verify(candidatePassword, user.password)
-    .catch((e: unknown) => false)
+    .verify(user.password, candidatePassword)
+    .catch((e: unknown) => {
+      logger.error(e)
+      return false
+    })
 }
 
 const UserModel = mongoose.model<UserDocument>('UserTask', userSchema)

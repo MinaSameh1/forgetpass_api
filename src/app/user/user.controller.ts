@@ -2,8 +2,9 @@ import { NextFunction, Request, Response } from 'express'
 import { createUser, login, updatePass } from './user.service'
 import { randomBytes } from 'crypto'
 import { findOneUser } from './user.repository'
-import { createToken, findToken, findTokenQuery } from '../token/token.repository'
+import { createToken, findToken } from '../token/token.repository'
 import { sendmail } from '../../utils/sendmail'
+import logger from '../../utils/logger'
 
 export async function getUserInfoController(_: Request, res: Response) {
   if (res.locals.user) return res.status(200).json(res.locals.user)
@@ -59,7 +60,8 @@ export async function requestResetPassController(req: Request, res: Response, ne
 
 export async function checktokenController(req: Request, res: Response, next: NextFunction) {
   try {
-    const token = await findToken(req.params.token)
+    const token = await findToken( req.params.token)
+    logger.info(`type of token:${typeof token}`)
     if (token) return res.status(200).json({ message: 'Correct Link' })
     return res.status(400).json({ message: 'Invalid Token/link' })
   } catch (err: unknown) {
@@ -69,9 +71,9 @@ export async function checktokenController(req: Request, res: Response, next: Ne
 
 export async function resetPassController(req: Request, res: Response, next: NextFunction) {
   try {
-    const token = await findTokenQuery({ token: req.params.token })
+    const token = await findToken({ token: req.params.token })
     if (token?.uid) {
-      const check = await updatePass(req.body.pass, token.uid.toString())
+      const check = await updatePass(req.body.password, token.uid.toString())
       if (check) {
         return res.status(200).json({ message: 'Password reset correct' })
       }

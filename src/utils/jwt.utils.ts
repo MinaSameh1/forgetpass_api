@@ -4,21 +4,17 @@ export function signJwt(
   object: Object,
   options?: jwt.SignOptions | undefined
 ) {
-  const signingKey = Buffer.from(
-    "SecretKey",
-    "base64"
-  ).toString("ascii");
+  const signingKey = 'secretkey'
 
   return jwt.sign(object, signingKey, {
     ...(options && options),
-    algorithm: "RS256",
   });
 }
 
 export function verifyJwt(
   token: string,
 ) {
-  const publicKey = "SecretKey"
+  const publicKey = "secretkey"
 
   try {
     const decoded = jwt.verify(token, publicKey);
