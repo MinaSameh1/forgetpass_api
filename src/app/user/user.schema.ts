@@ -27,14 +27,6 @@ export const tokenParam = object({
   })
 })
 
-export const resetpassSchema = object({
-  body: object({
-    password: string({
-      required_error: 'Password is required',
-    }).min(6, 'Password too short - should be 6 chars minimum'),
-  })
-})
-
 export const emailBody = object({
   body: object({
     email: string({
