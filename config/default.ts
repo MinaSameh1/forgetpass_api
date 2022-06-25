@@ -1,3 +1,4 @@
 export default {
-  loggingLevel: 'debug'
+  loggingLevel: 'debug',
+  dbUri: 'mongodb://localhost:27017/PIS',
 }

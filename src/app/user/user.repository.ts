@@ -17,6 +17,6 @@ export async function findOneUser(
   return UserModel.findOne(query, {}, options)
 }
 
-export async function CreateUser(user: UserInput) {
+export function CreateUser(user: UserInput) {
   return UserModel.create(user)
 }

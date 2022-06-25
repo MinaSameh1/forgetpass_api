@@ -12,7 +12,7 @@ const tokenSchema = new mongoose.Schema(
     token: { type: String, required: true },
     uid: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
+      ref: 'UserTask'
     }
   },
   {

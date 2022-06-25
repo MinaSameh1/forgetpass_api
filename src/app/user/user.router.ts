@@ -10,7 +10,8 @@ export const router: Router = Router()
 router.get(USER_ENDPOINT, requireUser, getUserInfoController)
 
 router.post(
-  USER_ENDPOINT, createUserController)
+  USER_ENDPOINT, createUserController
+)
 
 router.post(
   USER_ENDPOINT + "/login",
