@@ -36,7 +36,7 @@ export async function createUserController(req: Request, res: Response, next: Ne
     const user = await createUser(req.body)
     if (user) {
       return res.status(200).json({ message: 'User Created' })
-      
+
     }
     return res.status(400).json({ message: 'User not created' })
   } catch (err: unknown) {
@@ -60,7 +60,7 @@ export async function requestResetPassController(req: Request, res: Response, ne
 
 export async function checktokenController(req: Request, res: Response, next: NextFunction) {
   try {
-    const token = await findToken( req.params.token)
+    const token = await findToken(req.params.token)
     logger.info(`type of token:${typeof token}`)
     if (token) return res.status(200).json({ message: 'Correct Link' })
     return res.status(400).json({ message: 'Invalid Token/link' })
