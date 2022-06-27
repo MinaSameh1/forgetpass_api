@@ -1,6 +1,6 @@
-import mongoose from 'mongoose'
+import mongoose, { Document } from 'mongoose'
 
-export interface tokenDocuement extends mongoose.Document{
+export interface tokenDocuement extends Document {
   token: string
   uid: string
   createdAt: string
