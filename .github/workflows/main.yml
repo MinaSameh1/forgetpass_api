@@ -1,0 +1,18 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+jobs:
+  pretty:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Prettier Action
+        uses: creyD/prettier_action@v4.2
+        with:
+          prettier_options: --write **/*.{js,md,json,css,jsx,tsx,ts,scss}
+          commit_message: 'misc: Prettified Code!'

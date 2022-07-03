@@ -5,14 +5,14 @@ import { getRoutes } from './server.status.service';
 export const router: Router = Router();
 
 // getStatus
-router.get(SERVER_STATUS_ENDPOINT + "/", (req, res) => {
+router.get(SERVER_STATUS_ENDPOINT + "/", (_, res) => {
   res.status(200).send({
     "status": "server is running"
   });
 });
 
 // getRoutes
-router.get(SERVER_STATUS_ENDPOINT + "/routes", (req, res) => {
+router.get(SERVER_STATUS_ENDPOINT + "/routes", (_, res) => {
   const routes = getRoutes();
   res.status(200).send({
     numberOfRoutes: routes.length,
