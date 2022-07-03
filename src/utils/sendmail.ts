@@ -9,8 +9,8 @@ export async function sendmail(email: string, url: string) {
       host: 'smtp.gmail.com',
       auth: {
         user: process.env['GMAIL'],
-        pass: process.env['GMAIL_PASS'],
-      },
+        pass: process.env['GMAIL_PASS']
+      }
     })
   )
 
@@ -18,7 +18,7 @@ export async function sendmail(email: string, url: string) {
     from: process.env['GMAIL'],
     to: email,
     subject: 'Reset Password',
-    text: `You Requested to reset password, the following link will reset it \n ${url}`,
+    text: `You Requested to reset password, the following link will reset it \n ${url}`
   }
 
   return transporter.sendMail(mailOptions, (err, info) => {

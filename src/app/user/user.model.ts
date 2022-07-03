@@ -24,11 +24,11 @@ const userSchema = new mongoose.Schema(
     password: { type: String, required: true },
     role: { type: String, required: true },
     isAdmin: { type: Boolean, required: true },
-    token: { type: String, required: false },
+    token: { type: String, required: false }
   },
   {
     timestamps: true,
-    versionKey: false,
+    versionKey: false
   }
 )
 
@@ -51,12 +51,10 @@ userSchema.methods.comparePassword = async function (
 ): Promise<boolean> {
   const user = this as UserDocument
 
-  return argon
-    .verify(user.password, candidatePassword)
-    .catch((e: unknown) => {
-      logger.error(e)
-      return false
-    })
+  return argon.verify(user.password, candidatePassword).catch((e: unknown) => {
+    logger.error(e)
+    return false
+  })
 }
 
 const UserModel = mongoose.model<UserDocument>('UserTask', userSchema)

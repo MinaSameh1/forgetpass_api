@@ -7,12 +7,12 @@
 cp .env.example .env
 nano .env # Edit the file using any tool you like
 
-# For dev 
+# For dev
 npm i
 npm run dev
 
-# For production 
-npm i 
+# For production
+npm i
 npm run build
 npm run start
 ```

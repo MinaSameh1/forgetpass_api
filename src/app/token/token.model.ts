@@ -17,12 +17,12 @@ const tokenSchema = new mongoose.Schema(
   },
   {
     timestamps: true,
-    versionKey: false,
+    versionKey: false
   }
 )
 
 // Expire after 30 mins
-tokenSchema.index({ createdAt: 1 }, { expireAfterSeconds: 3600 });
+tokenSchema.index({ createdAt: 1 }, { expireAfterSeconds: 3600 })
 
 const TokenModel = mongoose.model('token', tokenSchema)
 

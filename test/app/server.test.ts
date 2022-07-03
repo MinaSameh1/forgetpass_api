@@ -17,9 +17,8 @@ describe('Server', () => {
     it('Should have debugginglevel defined', () => {
       expect(config.has('loggingLevel')).toBe(true)
     }),
-
-    it('Should have dbUri defined', () => {
-      expect(config.has('dbUri')).toBe(true)
-    })
+      it('Should have dbUri defined', () => {
+        expect(config.has('dbUri')).toBe(true)
+      })
   })
 })

@@ -4,10 +4,10 @@ import config from 'config'
 const logger = pino({
   transport: {
     target: 'pino-pretty',
-		options: {
-			ignore: 'pid,hostname',
-			translateTime: 'SYS:standard',
-		}
+    options: {
+      ignore: 'pid,hostname',
+      translateTime: 'SYS:standard'
+    }
   }
 })
 

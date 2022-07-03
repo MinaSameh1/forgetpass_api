@@ -21,22 +21,25 @@ export async function loginController(
     if (tokens) {
       res.cookie('x-refresh', tokens.refreshToken, {
         httpOnly: true,
-        secure: true,
+        secure: true
       })
       return res.status(200).json(tokens)
     }
-    return res.status(400).json({ message: "Wrong username/pass" })
+    return res.status(400).json({ message: 'Wrong username/pass' })
   } catch (e: unknown) {
     next(e)
   }
 }
 
-export async function createUserController(req: Request, res: Response, next: NextFunction) {
+export async function createUserController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const user = await createUser(req.body)
     if (user) {
       return res.status(200).json({ message: 'User Created' })
-
     }
     return res.status(400).json({ message: 'User not created' })
   } catch (err: unknown) {
@@ -44,9 +47,13 @@ export async function createUserController(req: Request, res: Response, next: Ne
   }
 }
 
-export async function requestResetPassController(req: Request, res: Response, next: NextFunction) {
+export async function requestResetPassController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
-    const token = randomBytes(10).toString("hex")
+    const token = randomBytes(10).toString('hex')
     const user = await findOneUser({ email: req.body.email })
     if (!user) return res.status(409).json({ message: "User doesn't exist!" })
     await createToken({ uid: user._id, token: token })
@@ -58,7 +65,11 @@ export async function requestResetPassController(req: Request, res: Response, ne
   }
 }
 
-export async function checktokenController(req: Request, res: Response, next: NextFunction) {
+export async function checktokenController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const token = await findToken(req.params.token)
     logger.info(`type of token:${typeof token}`)
@@ -69,7 +80,11 @@ export async function checktokenController(req: Request, res: Response, next: Ne
   }
 }
 
-export async function resetPassController(req: Request, res: Response, next: NextFunction) {
+export async function resetPassController(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
   try {
     const token = await findToken({ token: req.params.token })
     if (token?.uid) {

@@ -1,15 +1,19 @@
-import fs from 'fs';
+import fs from 'fs'
 
-export const getFilesWithKeyword = (keyword: string, folderName: string, files_?: Array<string>) => {
-  files_ = (typeof files_ === 'undefined') ? [] : files_;
-  const files = fs.readdirSync(folderName);
+export const getFilesWithKeyword = (
+  keyword: string,
+  folderName: string,
+  files_?: Array<string>
+) => {
+  files_ = typeof files_ === 'undefined' ? [] : files_
+  const files = fs.readdirSync(folderName)
   for (let i in files) {
-    let name = folderName + '/' + files[i];
+    let name = folderName + '/' + files[i]
     if (fs.statSync(name).isDirectory()) {
-      getFilesWithKeyword(keyword, name, files_);
+      getFilesWithKeyword(keyword, name, files_)
     } else {
-      name.includes(keyword) && files_.push(name);
+      name.includes(keyword) && files_.push(name)
     }
   }
-  return files_;
+  return files_
 }
