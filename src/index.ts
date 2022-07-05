@@ -10,7 +10,8 @@ process.on('exit', async () => {
 })
 
 async function start() {
-  if(process.env['production']) await connect(process.env['DB_URI'] || config.get<string>('dbUri'))
+  if (process.env['production'])
+    await connect(process.env['DB_URI'] || config.get<string>('dbUri'))
   else await connect(config.get<string>('dbUri'))
   app.listen(port, () => {
     console.info('Express application started on port: ' + port)
