@@ -5,10 +5,14 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "tsc",
-    "start": "node ./build/src/index.js",
-    "dev": "ts-node-dev --respawn ./src/index.ts",
-    "test": "jest --detectOpenHandles",
-    "prepare": "husky install"
+    "start": "cross-env NODE_ENV='production' node ./build/src/index.js",
+    "dev": "cross-env NODE_ENV='development' ts-node-dev --respawn ./src/index.ts",
+    "debug": "ts-node-dev --transpile-only --respawn --inspect=9229 src/index.ts",
+    "test": "cross-env NODE_ENV='test' jest --detectOpenHandles",
+    "test:watch": "cross-env NODE_ENV=development jest --watch --detectOpenHandles",
+    "test:debug": "cross-env NODE_ENV=development node --inspect ./node_modules/.bin/jest --detectOpenHandles --runInBand --watchAll=false",
+    "prepare": "husky install",
+    "pre-commit": "lint-staged"
   },
   "keywords": [
     "express",
@@ -41,6 +45,7 @@
     "argon2": "^0.28.5",
     "config": "^3.3.7",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "env-cmd": "^10.1.0",
     "express": "^4.18.1",
