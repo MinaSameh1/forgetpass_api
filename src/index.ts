@@ -1,4 +1,5 @@
 import app from './server'
+import config from 'config'
 import { connect, disconnect } from './utils/db'
 
 // Start the application by listening to specific port
@@ -9,7 +10,8 @@ process.on('exit', async () => {
 })
 
 async function start() {
-  await connect()
+  if(process.env['production']) await connect(process.env['DB_URI'] || config.get<string>('dbUri'))
+  else await connect(config.get<string>('dbUri'))
   app.listen(port, () => {
     console.info('Express application started on port: ' + port)
   })
